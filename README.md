@@ -10,7 +10,7 @@
 
 - Start project - npm start
 
-## Building processors
+For other script look at the package.json
 
 We are building API for apartment building. 12 apartments.
 Utilities like water, gas and etc.
