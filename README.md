@@ -71,3 +71,4 @@ We need import our middleware to `index.ts` and then register it – `app.use()`
 
 At the moment we have Users, Utilities, gasVolume and random servicees.  
 Later we decide, what we need more or maybe we must merge some of endpoints.
+For each i created endpoint.
