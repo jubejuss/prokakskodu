@@ -13,15 +13,6 @@ interface Db {
 const db: Db = {
   users: [
     {
-      id: 1,
-      apartment: 1,
-      firstName: 'Aina',
-      lastName: 'Mari',
-      email: 'mail@mail.ee',
-      phone: 67000000,
-      IBAN: 'EExxxxxxxx',
-    },
-    {
       id: 2,
       apartment: 2,
       firstName: 'Maie',
