@@ -23,7 +23,6 @@ const usersService = {
   createUser: (
     firstName: string,
     lastName: string,
-    apartment: number,
     email: string,
   ) => {
     const id = db.users.length + 1;
@@ -39,6 +38,7 @@ const usersService = {
     id: number;
     firstName?: string;
     lastName?: string;
+    email?: string;
   }): boolean => {
     const { id, firstName, lastName } = data;
     const index = db.users.findIndex((element) => element.id === id);

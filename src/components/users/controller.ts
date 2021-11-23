@@ -43,7 +43,9 @@ const usersController = {
     return res.status(responseCodes.noContent).json({});
   },
   createUser: (req: Request, res: Response) => {
-    const { apartment, firstName, lastName, email, phone, IBAN } = req.body;
+    const {
+      firstName, lastName, email,
+    } = req.body;
     if (!firstName) {
       return res.status(responseCodes.badRequest).json({
         error: 'First name is required',
@@ -54,28 +56,12 @@ const usersController = {
         error: 'Last name is required',
       });
     }
-    if (!apartment) {
-      return res.status(responseCodes.badRequest).json({
-        error: 'Apartment is required',
-      });
-    }
     if (!email) {
       return res.status(responseCodes.badRequest).json({
         error: 'Email is required',
       });
     }
-    if (!phone) {
-      return res.status(responseCodes.badRequest).json({
-        error: 'Phone is required',
-      });
-    }
-    if (!IBAN) {
-      return res.status(responseCodes.badRequest).json({
-        error: 'IBAN is required',
-      });
-    }
     const id = usersService.createUser(
-      apartment,
       firstName,
       lastName,
       email,
