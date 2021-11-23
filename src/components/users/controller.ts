@@ -44,7 +44,7 @@ const usersController = {
   },
   createUser: (req: Request, res: Response) => {
     const {
-      firstName, lastName, email,
+      firstName, lastName,
     } = req.body;
     if (!firstName) {
       return res.status(responseCodes.badRequest).json({
@@ -56,15 +56,9 @@ const usersController = {
         error: 'Last name is required',
       });
     }
-    if (!email) {
-      return res.status(responseCodes.badRequest).json({
-        error: 'Email is required',
-      });
-    }
     const id = usersService.createUser(
       firstName,
       lastName,
-      email,
     );
     return res.status(responseCodes.created).json({
       id,

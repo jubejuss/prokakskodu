@@ -10,7 +10,6 @@ const db: Db = {
       id: 1,
       firstName: 'Maie',
       lastName: 'Jaan',
-      email: 'mail@mail.ee',
     },
   ],
 };
