@@ -1,5 +1,5 @@
 import db from '../../db';
-import { User } from './interfaces';
+import User from './interfaces';
 
 const usersService = {
   getAllUsers: (): User[] => {
@@ -9,10 +9,6 @@ const usersService = {
 
   getUserById: (id: number): User | undefined => {
     const user = db.users.find((element) => element.id === id);
-    return user;
-  },
-  getUserByApartment: (apartment: number): User | undefined => {
-    const user = db.users.find((element) => element.apartment === apartment);
     return user;
   },
   getUserByEmail: (email: string): User | undefined => {
@@ -29,18 +25,13 @@ const usersService = {
     lastName: string,
     apartment: number,
     email: string,
-    phone: number,
-    IBAN: string
   ) => {
     const id = db.users.length + 1;
     db.users.push({
       id,
-      apartment,
       firstName,
       lastName,
       email,
-      phone,
-      IBAN,
     });
     return id;
   },

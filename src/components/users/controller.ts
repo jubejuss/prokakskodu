@@ -79,8 +79,6 @@ const usersController = {
       firstName,
       lastName,
       email,
-      phone,
-      IBAN
     );
     return res.status(responseCodes.created).json({
       id,
