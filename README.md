@@ -13,7 +13,10 @@
 For other script look at the package.json
 
 We are building API for apartment building. 12 apartments.
-Utilities like water, gas and etc.
+Utilities like water, gas and etc.  
+  
+Switch between branches:  
+* `$ git checkout <baranch_name>`
 
 ### Lets add parts of our api.
 
