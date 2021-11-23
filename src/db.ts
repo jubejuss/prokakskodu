@@ -1,4 +1,4 @@
-import User from './components/users/interfaces';
+import { User } from './components/users/interfaces';
 
 interface Db {
   users: User[];

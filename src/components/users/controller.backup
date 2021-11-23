@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import responseCodes from '../general/responseCodes';
 import usersService from './service';
-import { User, UpdateUser, NewUser} from './interfaces';
 
 const usersController = {
   getAllUsers: (req: Request, res: Response) => {
@@ -57,11 +56,10 @@ const usersController = {
         error: 'Last name is required',
       });
     }
-    const newUser: NewUser = {
+    const id = usersService.createUser(
       firstName,
       lastName,
-    };
-    const id = usersService.createUser( NewUser );
+    );
     return res.status(responseCodes.created).json({
       id,
     });
