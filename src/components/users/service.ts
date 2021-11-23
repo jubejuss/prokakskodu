@@ -1,12 +1,14 @@
 import db from '../../db';
-import { User } from './interfaces';
+import { User, UpdateUser, NewUser } from './interfaces';
 
 const usersService = {
   getAllUsers: (): User[] => {
     const { users } = db;
     return users;
   },
-
+  /**
+   * Returns user or undefined
+   */
   getUserById: (id: number): User | undefined => {
     const user = db.users.find((element) => element.id === id);
     return user;
@@ -16,24 +18,16 @@ const usersService = {
     db.users.splice(index, 1);
     return true;
   },
-  createUser: (
-    firstName: string,
-    lastName: string,
-  ) => {
+  createUser: (newUser: NewUser) => {
     const id = db.users.length + 1;
     db.users.push({
       id,
-      firstName,
-      lastName,
+      ...newUser,
     });
     return id;
   },
-  updateUser: (data: {
-    id: number;
-    firstName?: string;
-    lastName?: string;
-  }): boolean => {
-    const { id, firstName, lastName } = data;
+  updateUser: (user: UpdateUser): boolean => {
+    const { id, firstName, lastName } = user;
     const index = db.users.findIndex((element) => element.id === id);
     if (firstName) {
       db.users[index].firstName = firstName;
