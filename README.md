@@ -1,5 +1,7 @@
 # Homework API
 
+- watch Problem section in the end
+
 ## Run project
 
 - npm install
@@ -13,10 +15,11 @@
 For other script look at the package.json
 
 We are building API for apartment building. 12 apartments.
-Utilities like water, gas and etc.  
-  
-Switch between branches:  
-* `$ git checkout <baranch_name>`
+Utilities like water, gas and etc.
+
+Switch between branches:
+
+- `$ git checkout <baranch_name>`
 
 ### Lets add parts of our api.
 
@@ -77,23 +80,31 @@ Later we decide, what we need more or maybe we must merge some of endpoints.
 For each i created endpoint.
 
 ### Passwords hashing
+
 We need install crypting module  
-`npm install bcrypt` 
+`npm install bcrypt`
 `npm install --save-dev @types/bcrypt`
-* new folder for API services:  
-`general/services/hashService.ts`  
 
-* Test hashing  
-postman or thunder client  
-post
-localhost:3000/users
-Body
-json
+- new folder for API services:  
+  `general/services/hashService.ts`
 
-*** For posting you must have post endpoint ***
+- Test hashing  
+  postman or thunder client  
+  post
+  localhost:3000/users
+  Body
+  json
 
-### make auth folder with service and controller  
-* add 
+**_ For posting you must have post endpoint _**
+
+### make auth folder with service and controller
+
+### JWT
+
+- Install JSON WEB Token `npm install jsonwebtoken` and `npm install --save-dev @types/jsonwebtoken`
 
 Video stopped from 2:56:57
 
+## Problems
+
+Biggest problem was after first stage e.g. after second lesson, when api just didnt work. I could'nt find the reason. It took couple of days. Finaly i went back to the beginning, and made all again. I took example code and compared them row by row and then found mistake. I found a little mistake with one variable – i wrote just one character wrongly.

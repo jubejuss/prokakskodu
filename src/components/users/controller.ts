@@ -44,9 +44,7 @@ const usersController = {
     return res.status(responseCodes.noContent).json({});
   },
   createUser: async (req: Request, res: Response) => {
-    const {
-      firstName, lastName, password, email
-    } = req.body;
+    const { firstName, lastName, password, email } = req.body;
     if (!firstName) {
       return res.status(responseCodes.badRequest).json({
         error: 'First name is required',
