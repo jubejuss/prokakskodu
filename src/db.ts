@@ -10,6 +10,9 @@ const db: Db = {
       id: 1,
       firstName: 'Maie',
       lastName: 'Jaan',
+      email: 'maie@paie.ee',
+      password: 'maie',
+      role: 'Admin',
     },
   ],
 };

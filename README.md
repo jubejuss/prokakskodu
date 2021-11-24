@@ -75,3 +75,18 @@ We need import our middleware to `index.ts` and then register it – `app.use()`
 At the moment we have Users, Utilities, gasVolume and random servicees.  
 Later we decide, what we need more or maybe we must merge some of endpoints.
 For each i created endpoint.
+
+### Passwords hashing
+We need install crypting module  
+`npm install bcrypt` 
+`npm install --save-dev @types/bcrypt`
+* new folder for API services:  
+`general/services/hashService.ts`  
+
+* Test hashing  
+postman or thunder client  
+post
+localhost:3000/users
+Body
+json
+
