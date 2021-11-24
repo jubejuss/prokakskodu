@@ -1,6 +1,7 @@
 import express, { Application } from 'express';
 import cors from 'cors';
 import usersController from './components/users/controller';
+import authController from './components/auth/controller';
 
 import { port } from './components/general/settings';
 
@@ -12,6 +13,9 @@ app.use(express.json());
 app.use(cors());
 // register middleware
 app.use(middler);
+
+// login
+app.post('/login', authController.login);
 
 app.get('/users', usersController.getAllUsers);
 app.get('/users/:id', usersController.getUserById);

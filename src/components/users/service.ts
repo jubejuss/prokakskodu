@@ -14,6 +14,10 @@ const usersService = {
     const user = db.users.find((element) => element.id === id);
     return user;
   },
+  getUserByEmail: (email: string): User | undefined => {
+    const user = db.users.find((element) => element.email === email);
+    return user;
+  },
   removeUser: (id: number): boolean => {
     const index = db.users.findIndex((element) => element.id === id);
     db.users.splice(index, 1);
