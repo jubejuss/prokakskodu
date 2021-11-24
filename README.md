@@ -103,7 +103,11 @@ We need install crypting module
 
 - Install JSON WEB Token `npm install jsonwebtoken` and `npm install --save-dev @types/jsonwebtoken`
 
-Video stopped from 2:56:57
+* create `isLoggedInMiddleware.ts`
+  This middleware controlls, is user logged in or not.
+*
+
+Video stop 17.00
 
 ## Problems
 

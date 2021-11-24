@@ -7,6 +7,7 @@ import { port } from './components/general/settings';
 
 // middleware
 import middler from './components/general/testMiddleware';
+import isLoggedIn from './components/auth/isLoggedInMiddleware';
 
 const app: Application = express();
 app.use(express.json());
@@ -16,12 +17,14 @@ app.use(middler);
 
 // login
 app.post('/login', authController.login);
+// greate user
+app.post('/users', usersController.createUser);
+
+app.use(isLoggedIn);
 
 app.get('/users', usersController.getAllUsers);
 app.get('/users/:id', usersController.getUserById);
 app.delete('/users/:id', usersController.removeUser);
-
-app.post('/users', usersController.createUser);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
