@@ -11,7 +11,7 @@ const db: Db = {
       firstName: 'Maie',
       lastName: 'Jaan',
       email: 'maie@paie.ee',
-      password: 'maie',
+      password: '$2b$10$QPkywYQSrdFi8Yc2bdSmAuPalMLaiPwkCWfB1ivb4goaJOjJOjowy',
       role: 'Admin',
     },
   ],

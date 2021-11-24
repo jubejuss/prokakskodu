@@ -17,6 +17,8 @@ app.get('/users', usersController.getAllUsers);
 app.get('/users/:id', usersController.getUserById);
 app.delete('/users/:id', usersController.removeUser);
 
+app.post('/users', usersController.createUser);
+
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Server is running on port: ${port}`);

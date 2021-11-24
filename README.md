@@ -90,3 +90,5 @@ localhost:3000/users
 Body
 json
 
+*** For posting you must have post endpoint ***
+
