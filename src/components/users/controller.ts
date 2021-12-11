@@ -5,6 +5,7 @@ import { UpdateUser, NewUser } from './interfaces';
 
 const usersController = {
   getAllUsers: (req: Request, res: Response) => {
+    console.log(req.headers);
     const users = usersService.getAllUsers();
     return res.status(responseCodes.ok).json({
       users,
