@@ -112,9 +112,25 @@ Video stop 17.00
 ### Tokens
 
 - How do we get Token?
-  In Thunder client or Postman lets do POST and localhost:3000/login  
+  In Thunder client or Postman lets do first POST  
+  localhost:3000/users:  
+  ```json
+  {
+    "firstName": "Vello",
+    "lastName":"Perenimi",
+    "email": "onu@mets.ee",
+    "password": "maie"
+  }
+  ```
+  then post localhost:3000/login:
+  ```JSON
+  {
+    "email": "onu@mets.ee",
+    "password": "maie"
+  }
+  ```  
   Then we get Token.  
-  Then lets copy that token to Auth > Bearer
+  Then lets copy that token to Headers Auth > Bearer
 
 
 
