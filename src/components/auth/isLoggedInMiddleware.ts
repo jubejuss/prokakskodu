@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
+import jwtService from '../general/services/jwtService';
 import responseCodes from '../general/responseCodes';
 
-const isLoggedIn = (req: Request, res: Response, next: NextFunction) => {
+const isLoggedIn = async (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
   const token = authHeader?.split(' ')[1];
   if (!token) {
@@ -9,7 +10,9 @@ const isLoggedIn = (req: Request, res: Response, next: NextFunction) => {
       error: 'No token provided',
     });
   }
-  console.log(token);
+  const verify = await jwtService.verify(token);
+  console.log(verify);
   return next();
 };
+
 export default isLoggedIn;
