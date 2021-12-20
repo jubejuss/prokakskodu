@@ -116,6 +116,12 @@ Video stop 17.00
   Then we get Token.  
   Then lets copy that token to Auth > Bearer
 
+
+
+
+
+  
+
 ## Problems
 
 Biggest problem was after first stage e.g. after second lesson, when api just didnt work. I could'nt find the reason. It took couple of days. Finaly i went back to the beginning, and made all again. I took example code and compared them row by row and then found mistake. I found a little mistake with one variable – i wrote just one character wrongly.
