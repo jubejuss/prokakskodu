@@ -132,6 +132,8 @@ Video stop 17.00
   Then we get Token.  
   Then lets copy that token to Headers Auth > Bearer
 
+  ### Who can see users, how controll users  
+isAdminMiddleware – pass getal users through that
 
 
 

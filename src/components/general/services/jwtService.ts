@@ -13,8 +13,13 @@ const jwtService = {
     return token;
   },
   verify: async (token: string) => {
-    const verify = await jwt.verify(token, jwtPassword);
-    return verify;
+    try {
+      const verify = await jwt.verify(token, jwtPassword);
+      return verify;
+    } catch (error) {
+      // console.log(error);
+      return false;
+    }
   },
 };
 
