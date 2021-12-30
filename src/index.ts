@@ -19,7 +19,6 @@ app.use(middler);
 // login
 app.post('/login', authController.login);
 
-
 // greate user
 app.post('/users', usersController.createUser);
 

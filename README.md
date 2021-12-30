@@ -113,32 +113,40 @@ Video stop 17.00
 
 - How do we get Token?
   In Thunder client or Postman lets do first POST  
-  localhost:3000/users:  
+   localhost:3000/users:
+
   ```json
   {
     "firstName": "Vello",
-    "lastName":"Perenimi",
+    "lastName": "Perenimi",
     "email": "onu@mets.ee",
     "password": "maie"
   }
   ```
+
   then post localhost:3000/login:
+
   ```JSON
   {
     "email": "onu@mets.ee",
     "password": "maie"
   }
-  ```  
+  ```
+
   Then we get Token.  
-  Then lets copy that token to Headers Auth > Bearer
+   Then lets copy that token to Headers Auth > Bearer
 
-  ### Who can see users, how controll users  
-isAdminMiddleware – pass getal users through that
+  ### Who can see users, how controll users
 
+  isAdminMiddleware – pass getal users through that
 
+### Connecting with mysql
 
+Use MySQL driver (if does not work, use ver 2)
+Make myssql queries
+Make database.ts and import mySQL driver
 
-  
+12.00
 
 ## Problems
 
