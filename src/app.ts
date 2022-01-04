@@ -1,8 +1,11 @@
 import express, { Application } from 'express';
 import cors from 'cors';
+import authController from './components/auth/controller';
 import usersController from './components/users/controller';
 import indicatorsController from './components/indicators/controller';
-import authController from './components/auth/controller';
+import gasController from './components/gas/controller';
+import waterController from './components/water/controller';
+import extraUtilitiesController from './components/extraUtilities/controller';
 
 // middleware
 import middler from './components/general/testMiddleware';
@@ -28,5 +31,16 @@ app.use(isLoggedIn);
 app.get('/users', isAdmin, usersController.getAllUsers);
 app.get('/users/:id', usersController.getUserById);
 app.delete('/users/:id', usersController.removeUser);
+
+app.get('/indicators', indicatorsController.getAllIndicators);
+app.get('/months', indicatorsController.getIndicatorsByMonths);
+
+app.get('/gas', gasController.getAllGas);
+
+app.get('/water', waterController.getAllWater);
+
+app.get('/extrautilities', extraUtilitiesController.getAllExtraUtilities);
+app.get('/extrautilities/:id', extraUtilitiesController.getExtraUtilityById);
+app.patch('/extrautilities/:id', extraUtilitiesController.updateExtraUtility);
 
 export default app;
