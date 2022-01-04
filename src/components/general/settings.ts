@@ -1,4 +1,4 @@
 const port: number = 3000;
-const databaseName = 'excuses';
+const databaseName = 'apart_build_upd';
 
 export { port, databaseName };

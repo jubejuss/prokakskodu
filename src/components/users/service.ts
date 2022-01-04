@@ -6,7 +6,7 @@ import hashService from '../general/services/hashService';
 const usersService = {
   getAllUsers: async () => {
     const [users] = await pool.query(
-      'SELECT id, firstName, lastName, email, password, role, dateCreated, dateDeleted FROM users WHERE dateDeleted IS NULL'
+      'SELECT id, apartmentNr, firstName, lastName, email, password, role, dateCreated, dateDeleted FROM users WHERE dateDeleted IS NULL'
     );
     return users;
   },
@@ -15,7 +15,7 @@ const usersService = {
    */
   getUserById: async (id: number) => {
     const [user]: any = await pool.query(
-      'SELECT id, firstName, lastName, email, password, role, dateCreated, dateDeleted FROM users WHERE id = ? AND dateDeleted IS NULL',
+      'SELECT id, apartmentNr, firstName, lastName, email, password, role, dateCreated, dateDeleted FROM users WHERE id = ? AND dateDeleted IS NULL',
       [id]
     );
     return user[0];
