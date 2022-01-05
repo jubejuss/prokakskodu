@@ -165,6 +165,33 @@ app.listen(port, () => {
 });
 ```
 
+`npm run test`
+
+This ise the short version of test:
+
+```javascript
+describe('indicators controller', () => {
+  describe('GET /indicators', () => {
+    it('responds with code 401 and error message', async () => {
+      const response = await request(app).get('/indicators');
+      expect(response.body).to.be.a('object');
+      expect(response.statusCode).to.equal(401);
+      expect(response.body).to.have.key('error');
+      expect(response.body.error).to.equal('No token provided');
+    });
+  });
+});
+```
+
+What we expect:  
+`expect(response.body).to.be.a('object');`  
+status code (find in codes folder):  
+`expect(response.statusCode).to.equal(401);` this is from codes folder
+key:  
+`expect(response.body).to.have.key('error');`
+message:  
+`expect(response.body.error).to.equal('No token provided');` this is from isLoginMiddelware
+
 ## Problems
 
 Biggest problem was after first stage e.g. after second lesson, when api just didnt work. I could'nt find the reason. It took couple of days. Finaly i went back to the beginning, and made all again. I took example code and compared them row by row and then found mistake. I found a little mistake with one variable – i wrote just one character wrongly.
