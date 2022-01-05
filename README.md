@@ -192,6 +192,8 @@ key:
 message:  
 `expect(response.body.error).to.equal('No token provided');` this is from isLoginMiddelware
 
+`.set` for loggin (look from supertest web)
+
 ## Problems
 
 Biggest problem was after first stage e.g. after second lesson, when api just didnt work. I could'nt find the reason. It took couple of days. Finaly i went back to the beginning, and made all again. I took example code and compared them row by row and then found mistake. I found a little mistake with one variable – i wrote just one character wrongly.
