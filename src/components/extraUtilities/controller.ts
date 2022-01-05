@@ -28,6 +28,23 @@ const getExtraUtilityById = async (req: Request, res: Response) => {
   });
 };
 
+const createExtraUtility = async (req: Request, res: Response) => {
+  const { name, description, price, amount } = req.body;
+  const newExtraUtility: INewExtraUtility = {
+    name,
+    description,
+    price,
+    amount,
+  };
+  const id = await extraUtilitiesService.createExtraUtility(newExtraUtility);
+  if (!id) {
+    return res.status(responseCodes.serverError).json({});
+  }
+  return res.status(responseCodes.created).json({
+    id,
+  });
+};
+
 const updateExtraUtility = async (req: Request, res: Response) => {
   const id: number = parseInt(req.params.id, 10);
   const { name, price, amount, description } = req.body;
@@ -60,6 +77,7 @@ const updateExtraUtility = async (req: Request, res: Response) => {
 const extraUtilitiesController = {
   getAllExtraUtilities,
   getExtraUtilityById,
+  createExtraUtility,
   updateExtraUtility,
 };
 

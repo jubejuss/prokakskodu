@@ -34,6 +34,26 @@ const getExtraUtilityById = async (
   }
 };
 
+const createExtraUtility = async (
+  newExtraUtility: INewExtraUtility
+): Promise<number | false> => {
+  try {
+    const [result]: [ResultSetHeader, FieldPacket[]] = await pool.query(
+      'INSERT INTO extraUtilities SET name = ?, description = ?, price = ?, amount = ?',
+      [
+        newExtraUtility.name,
+        newExtraUtility.description,
+        newExtraUtility.price,
+        newExtraUtility.amount,
+      ]
+    );
+    return result.insertId;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
 const updateExtraUtility = async (
   extraUtilityToUpdate: IUpdateExtraUtility
 ): Promise<boolean> => {
@@ -54,6 +74,7 @@ const updateExtraUtility = async (
 const extraUtilitiesService = {
   getAllExtraUtilities,
   getExtraUtilityById,
+  createExtraUtility,
   updateExtraUtility,
 };
 

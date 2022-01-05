@@ -42,5 +42,6 @@ app.get('/water', waterController.getAllWater);
 app.get('/extrautilities', extraUtilitiesController.getAllExtraUtilities);
 app.get('/extrautilities/:id', extraUtilitiesController.getExtraUtilityById);
 app.patch('/extrautilities/:id', extraUtilitiesController.updateExtraUtility);
+app.post('/extrautilities', extraUtilitiesController.createExtraUtility);
 
 export default app;

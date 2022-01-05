@@ -2,8 +2,8 @@ import { RowDataPacket } from 'mysql2';
 
 interface INewExtraUtility {
   name: string;
-  price: number;
   description: string;
+  price: number;
   amount: number;
 }
 
