@@ -1,5 +1,7 @@
 # Homework API
 
+- watch Problem section in the end
+
 ## Run project
 
 - npm install
@@ -14,6 +16,10 @@ For other script look at the package.json
 
 We are building API for apartment building. 12 apartments.
 Utilities like water, gas and etc.
+
+Switch between branches:
+
+- `$ git checkout <baranch_name>`
 
 ### Lets add parts of our api.
 
@@ -72,3 +78,122 @@ We need import our middleware to `index.ts` and then register it – `app.use()`
 At the moment we have Users, Utilities, gasVolume and random servicees.  
 Later we decide, what we need more or maybe we must merge some of endpoints.
 For each i created endpoint.
+
+### Passwords hashing
+
+We need install crypting module  
+`npm install bcrypt`
+`npm install --save-dev @types/bcrypt`
+
+- new folder for API services:  
+  `general/services/hashService.ts`
+
+- Test hashing  
+  postman or thunder client  
+  post
+  localhost:3000/users
+  Body
+  json
+
+**_ For posting you must have post endpoint _**
+
+### make auth folder with service and controller
+
+### JWT
+
+- Install JSON WEB Token `npm install jsonwebtoken` and `npm install --save-dev @types/jsonwebtoken`
+
+* create `isLoggedInMiddleware.ts`
+  This middleware controlls, is user logged in or not.
+*
+
+Video stop 17.00
+
+### Tokens
+
+- How do we get Token?
+  In Thunder client or Postman lets do first POST  
+   localhost:3000/users:
+
+  ```json
+  {
+    "firstName": "Vello",
+    "lastName": "Perenimi",
+    "email": "onu@mets.ee",
+    "password": "maie"
+  }
+  ```
+
+  then post localhost:3000/login:
+
+  ```JSON
+  {
+    "email": "onu@mets.ee",
+    "password": "maie"
+  }
+  ```
+
+  Then we get Token.  
+   Then lets copy that token to Headers Auth > Bearer
+
+  ### Who can see users, how controll users
+
+  isAdminMiddleware – pass getal users through that
+
+### Connecting with mysql
+
+Use MySQL driver (if does not work, use ver 2)
+Make myssql queries
+Make database.ts and import mySQL driver
+
+### Tests
+
+mocha
+Chai
+Superttest – data for tests
+Tests folder
+For testing purposes leave in `index.ts` only
+
+```javascript
+import app from './app';
+import config from './config';
+
+const port = config.port || 3000;
+
+app.listen(port, () => {
+  console.log(`Server is running on port: ${port}`);
+});
+```
+
+`npm run test`
+
+This ise the short version of test:
+
+```javascript
+describe('indicators controller', () => {
+  describe('GET /indicators', () => {
+    it('responds with code 401 and error message', async () => {
+      const response = await request(app).get('/indicators');
+      expect(response.body).to.be.a('object');
+      expect(response.statusCode).to.equal(401);
+      expect(response.body).to.have.key('error');
+      expect(response.body.error).to.equal('No token provided');
+    });
+  });
+});
+```
+
+What we expect:  
+`expect(response.body).to.be.a('object');`  
+status code (find in codes folder):  
+`expect(response.statusCode).to.equal(401);` this is from codes folder
+key:  
+`expect(response.body).to.have.key('error');`
+message:  
+`expect(response.body.error).to.equal('No token provided');` this is from isLoginMiddelware
+
+`.set` for loggin (look from supertest web)
+
+## Problems
+
+Biggest problem was after first stage e.g. after second lesson, when api just didnt work. I could'nt find the reason. It took couple of days. Finaly i went back to the beginning, and made all again. I took example code and compared them row by row and then found mistake. I found a little mistake with one variable – i wrote just one character wrongly.

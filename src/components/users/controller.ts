@@ -1,32 +1,38 @@
 import { Request, Response } from 'express';
 import responseCodes from '../general/responseCodes';
 import usersService from './service';
+import { IUpdateUser, INewUser } from './interfaces';
 
 const usersController = {
-  getAllUsers: (req: Request, res: Response) => {
-    const users = usersService.getAllUsers();
+  getAllUsers: async (req: Request, res: Response) => {
+    const users = await usersService.getAllUsers();
     return res.status(responseCodes.ok).json({
       users,
     });
   },
-  getUserById: (req: Request, res: Response) => {
+  getUserById: async (req: Request, res: Response) => {
     const id: number = parseInt(req.params.id, 10);
     if (!id) {
       return res.status(responseCodes.badRequest).json({
         error: 'No valid id provided',
       });
     }
-    const user = usersService.getUserById(id);
-    if (!user) {
-      return res.status(responseCodes.badRequest).json({
-        error: `No user found with id: ${id}`,
+    if (id === res.locals.user.id || res.locals.user.role === 'Admin') {
+      const user = await usersService.getUserById(id);
+      if (!user) {
+        return res.status(responseCodes.badRequest).json({
+          error: `No user found with id: ${id}`,
+        });
+      }
+      return res.status(responseCodes.ok).json({
+        user,
       });
     }
-    return res.status(responseCodes.ok).json({
-      user,
+    return res.status(responseCodes.notAuthorized).json({
+      error: 'You have no permission for this info',
     });
   },
-  removeUser: (req: Request, res: Response) => {
+  removeUser: async (req: Request, res: Response) => {
     const id: number = parseInt(req.params.id, 10);
     if (!id) {
       return res.status(responseCodes.badRequest).json({
@@ -39,11 +45,20 @@ const usersController = {
         message: `User not found with id: ${id}`,
       });
     }
-    usersService.removeUser(id);
+    const response = await usersService.removeUser(id);
+    if (!response) {
+      return res.status(responseCodes.serverError).json({});
+    }
     return res.status(responseCodes.noContent).json({});
   },
-  createUser: (req: Request, res: Response) => {
-    const { apartment, firstName, lastName, email, phone, IBAN } = req.body;
+  createUser: async (req: Request, res: Response) => {
+    const { apartmentNr, firstName, lastName, password, email } = req.body;
+
+    if (!apartmentNr) {
+      return res.status(responseCodes.badRequest).json({
+        error: 'Apartment number is required',
+      });
+    }
     if (!firstName) {
       return res.status(responseCodes.badRequest).json({
         error: 'First name is required',
@@ -54,47 +69,47 @@ const usersController = {
         error: 'Last name is required',
       });
     }
-    if (!apartment) {
-      return res.status(responseCodes.badRequest).json({
-        error: 'Apartment is required',
-      });
-    }
     if (!email) {
       return res.status(responseCodes.badRequest).json({
         error: 'Email is required',
       });
     }
-    if (!phone) {
+    if (!password) {
       return res.status(responseCodes.badRequest).json({
-        error: 'Phone is required',
+        error: 'Password is required',
       });
     }
-    if (!IBAN) {
-      return res.status(responseCodes.badRequest).json({
-        error: 'IBAN is required',
-      });
-    }
-    const id = usersService.createUser(
-      apartment,
+    const newUser: INewUser = {
+      apartmentNr,
       firstName,
       lastName,
       email,
-      phone,
-      IBAN
-    );
+      password,
+      role: 'User',
+    };
+    const id = await usersService.createUser(newUser);
     return res.status(responseCodes.created).json({
       id,
     });
   },
-  updateUser: (req: Request, res: Response) => {
+  updateUser: async (req: Request, res: Response) => {
     const id: number = parseInt(req.params.id, 10);
-    const { firstName, lastName } = req.body;
+    const { apartmentNr, firstName, lastName, email, password, role } =
+      req.body;
+    const isAdmin = res.locals.user.role === 'Admin';
     if (!id) {
       return res.status(responseCodes.badRequest).json({
         error: 'No valid id provided',
       });
     }
-    if (!firstName && !lastName) {
+    if (
+      !apartmentNr &&
+      !firstName &&
+      !lastName &&
+      !email &&
+      !password &&
+      !role
+    ) {
       return res.status(responseCodes.badRequest).json({
         error: 'Nothing to update',
       });
@@ -105,7 +120,18 @@ const usersController = {
         error: `No user found with id: ${id}`,
       });
     }
-    usersService.updateUser({ id, firstName, lastName });
+    const updateUser: IUpdateUser = {
+      id,
+    };
+    if (firstName) updateUser.firstName = firstName;
+    if (lastName) updateUser.lastName = lastName;
+    if (email) updateUser.email = email;
+    if (password) updateUser.password = password;
+    if (role && isAdmin) updateUser.role = role === 'Admin' ? 'Admin' : 'User';
+    const result = await usersService.updateUser(updateUser);
+    if (!result) {
+      res.status(responseCodes.serverError).json({});
+    }
     return res.status(responseCodes.noContent).json({});
   },
 };

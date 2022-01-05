@@ -1,63 +1,89 @@
-import db from '../../db';
-import { User } from './interfaces';
+import { FieldPacket, ResultSetHeader } from 'mysql2';
+import pool from '../../database';
+import { IUpdateUser, INewUser, IUser } from './interfaces';
+import hashService from '../general/services/hashService';
 
 const usersService = {
-  getAllUsers: (): User[] => {
-    const { users } = db;
-    return users;
+  getAllUsers: async (): Promise<IUser[] | false> => {
+    try {
+      const [users]: [IUser[], FieldPacket[]] = await pool.query(
+        'SELECT id, firstName, lastName, email, dateCreated, role FROM users WHERE dateDeleted IS NULL'
+      );
+      return users;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   },
 
-  getUserById: (id: number): User | undefined => {
-    const user = db.users.find((element) => element.id === id);
-    return user;
-  },
-  getUserByApartment: (apartment: number): User | undefined => {
-    const user = db.users.find((element) => element.apartment === apartment);
-    return user;
-  },
-  getUserByEmail: (email: string): User | undefined => {
-    const user = db.users.find((element) => element.email === email);
-    return user;
-  },
-  removeUser: (id: number): boolean => {
-    const index = db.users.findIndex((element) => element.id === id);
-    db.users.splice(index, 1);
-    return true;
-  },
-  createUser: (
-    firstName: string,
-    lastName: string,
-    apartment: number,
-    email: string,
-    phone: number,
-    IBAN: string
-  ) => {
-    const id = db.users.length + 1;
-    db.users.push({
-      id,
-      apartment,
-      firstName,
-      lastName,
-      email,
-      phone,
-      IBAN,
-    });
-    return id;
-  },
-  updateUser: (data: {
-    id: number;
-    firstName?: string;
-    lastName?: string;
-  }): boolean => {
-    const { id, firstName, lastName } = data;
-    const index = db.users.findIndex((element) => element.id === id);
-    if (firstName) {
-      db.users[index].firstName = firstName;
+  getUserById: async (id: number): Promise<IUser | false> => {
+    try {
+      const [users]: [IUser[], FieldPacket[]] = await pool.query(
+        'SELECT id, firstName, lastName, email, dateCreated, dateUpdated, dateDeleted FROM users WHERE id = ? AND dateDeleted IS NULL LIMIT 1',
+        [id]
+      );
+      return users[0];
+    } catch (error) {
+      console.log(error);
+      return false;
     }
-    if (lastName) {
-      db.users[index].lastName = lastName;
+  },
+  getUserByEmail: async (email: string): Promise<IUser | false> => {
+    try {
+      const [user]: [IUser[], FieldPacket[]] = await pool.query(
+        'SELECT * FROM users WHERE email = ? AND dateDeleted IS NULL',
+        [email]
+      );
+      return user[0];
+    } catch (error) {
+      console.log(error);
+      return false;
     }
-    return true;
+  },
+  removeUser: async (id: number): Promise<boolean> => {
+    try {
+      await pool.query('UPDATE users SET dateDeleted = ? WHERE id = ?', [
+        new Date(),
+        id,
+      ]);
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
+  createUser: async (newUser: INewUser): Promise<number | false> => {
+    try {
+      const hashedPassword = await hashService.hash(newUser.password);
+      const user = {
+        ...newUser,
+        password: hashedPassword,
+      };
+      const [result]: [ResultSetHeader, FieldPacket[]] = await pool.query(
+        'INSERT INTO users SET ?',
+        [user]
+      );
+      return result.insertId;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  },
+  updateUser: async (user: IUpdateUser): Promise<boolean> => {
+    try {
+      const userToUpdate = { ...user };
+      if (user.password)
+        userToUpdate.password = await hashService.hash(user.password);
+      const result = await pool.query('UPDATE users SET ? WHERE id = ?', [
+        userToUpdate,
+        user.id,
+      ]);
+      console.log(result);
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   },
 };
 

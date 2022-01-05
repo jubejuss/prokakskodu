@@ -1,11 +1,28 @@
-interface User {
-  id: number;
-  apartment: number;
+import { RowDataPacket } from 'mysql2';
+
+interface INewUser {
+  apartmentNr: number;
   firstName: string;
   lastName: string;
   email: string;
-  phone: number;
-  IBAN: string;
+  password: string;
+  role: 'Admin' | 'User';
 }
 
-export { User };
+interface IUser extends INewUser, RowDataPacket {
+  id: number;
+  dateCreated: Date;
+  dateUpdated: Date;
+  dateDeleted: Date | null;
+}
+
+interface IUpdateUser {
+  id: number;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  password?: string;
+  role?: 'Admin' | 'User';
+}
+
+export { IUser, IUpdateUser, INewUser };
