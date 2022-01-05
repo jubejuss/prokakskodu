@@ -6,6 +6,7 @@ import indicatorsController from './components/indicators/controller';
 import gasController from './components/gas/controller';
 import waterController from './components/water/controller';
 import extraUtilitiesController from './components/extraUtilities/controller';
+import ping from './components/ping/controller';
 
 // middleware
 import middler from './components/general/testMiddleware';
@@ -17,6 +18,11 @@ app.use(express.json());
 app.use(cors());
 // register middleware
 app.use(middler);
+
+/**
+ * API test endpoint
+ */
+app.get('/ping', ping);
 
 // login
 app.post('/login', authController.login);

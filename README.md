@@ -146,7 +146,24 @@ Use MySQL driver (if does not work, use ver 2)
 Make myssql queries
 Make database.ts and import mySQL driver
 
-12.00
+### Tests
+
+mocha
+Chai
+Superttest – data for tests
+Tests folder
+For testing purposes leave in `index.ts` only
+
+```javascript
+import app from './app';
+import config from './config';
+
+const port = config.port || 3000;
+
+app.listen(port, () => {
+  console.log(`Server is running on port: ${port}`);
+});
+```
 
 ## Problems
 
