@@ -4,6 +4,7 @@ import indicatorsService from './service';
 
 const getAllIndicators = async (req: Request, res: Response) => {
   const Indicators = await indicatorsService.getAllIndicators();
+  console.log(req);
   return res.status(responseCodes.ok).json({
     Indicators,
   });
