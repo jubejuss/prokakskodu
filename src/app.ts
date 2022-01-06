@@ -32,12 +32,12 @@ app.post('/login', authController.login);
 // greate user
 app.post('/users', usersController.createUser);
 
-// app.use(isLoggedIn);
+app.use(isLoggedIn);
 
 // app.get('/users', usersController.getAllUsers);
 // add isAdminMiddleware to controll is admin or not
-// app.get('/users', isAdmin, usersController.getAllUsers);
-app.get('/users', usersController.getAllUsers);
+app.get('/users', isAdmin, usersController.getAllUsers);
+//app.get('/users', usersController.getAllUsers);
 app.get('/users/:id', usersController.getUserById);
 app.delete('/users/:id', usersController.removeUser);
 
