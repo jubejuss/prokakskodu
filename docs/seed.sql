@@ -37,6 +37,7 @@ INSERT INTO extraUtilities (name, price, description, amount, dateFrom, DateTo)
     
 SELECT name, price, description, amount, DATE_FORMAT(dateFrom, "%M %Y") as 'From', DATE_FORMAT(DateTo, "%M %Y") as 'To' FROM extraUtilities;
 
+SELECT * FROM users;
 SELECT * FROM indicators;
 
 Select users.apartmentNr as 'Korteri nr', DATE_FORMAT(indicators.month, "%M %Y") AS Periood , concat(users.firstName, " ", users.lastName) AS Omanik, 
