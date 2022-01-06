@@ -47,7 +47,7 @@ const createExtraUtility = async (req: Request, res: Response) => {
 
 const updateExtraUtility = async (req: Request, res: Response) => {
   const id: number = parseInt(req.params.id, 10);
-  const { name, price, amount, description } = req.body;
+  const { name, price, amount, description, dateFrom, dateTo } = req.body;
   if (!name) {
     return res.status(responseCodes.badRequest).json({
       error: 'Nothing to update',
@@ -65,6 +65,8 @@ const updateExtraUtility = async (req: Request, res: Response) => {
     description,
     price,
     amount,
+    dateFrom,
+    dateTo
   };
 
   const result = await extraUtilitiesService.updateExtraUtility(update);

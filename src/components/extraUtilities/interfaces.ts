@@ -17,6 +17,8 @@ interface IUpdateExtraUtility {
   description: string;
   price: number;
   amount: number;
+  dateFrom: Date;
+  dateTo: Date;
 }
 
 export { INewExtraUtility, IExtraUtility, IUpdateExtraUtility };

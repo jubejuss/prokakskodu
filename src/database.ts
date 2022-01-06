@@ -18,7 +18,7 @@ const pool = mysql
 
 pool.query(`USE ${config.db.database};`).catch(() => {
   console.log('Creating database');
-  const sqlPath = path.join(__dirname, '../docs/modelAndSeed.sql');
+  const sqlPath = path.join(__dirname, '../docs/seed.sql');
   const SQL = fs.readFileSync(sqlPath, { encoding: 'utf-8' });
   pool
     .query(SQL)
