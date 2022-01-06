@@ -1,0 +1,139 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Apartment building api",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000"
+        }
+    ],
+    "components": {
+        "schemas": {
+            "id": {
+                "type": "number",
+                "example": 1
+            },
+            "text": {
+                "type": "string",
+                "example": "Text"
+            },
+            "integer": {
+                "type": "integer"
+            },
+            "boolean": {
+                "type": "boolean"
+            },
+            "email": {
+                "type": "string",
+                "example": "jaan@bajaan.ee"
+            },
+            "date": {
+                "type": "string",
+                "example": "2022-01-06T10:07:21.000Z"
+            }
+        }
+    },
+    "paths": {
+        "/users": {
+            "get": {
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "users": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "$ref": "#/components/schemas/id"
+                                                    },
+                                                    "firstName": {},
+                                                    "lastName": {
+                                                        "$ref": "#/components/schemas/text"
+                                                    },
+                                                    "email": {
+                                                        "$ref": "#/components/schemas/email"
+                                                    },
+                                                    "dateCreated": {
+                                                        "$ref": "#/components/schemas/date"
+                                                    },
+                                                    "dateUpdated": {
+                                                        "$ref": "#/components/schemas/date"
+                                                    },
+                                                    "role": {
+                                                        "$ref": "#/components/schemas/boolean"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/indicators": {
+            "get": {
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "indicators": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "$ref": "#/components/schemas/id"
+                                                    },
+                                                    "users_id": {
+                                                        "$ref": "#/components/schemas/id"
+                                                    },
+                                                    "month": {
+                                                        "$ref": "#/components/schemas/date"
+                                                    },
+                                                    "gasUsage": {
+                                                        "$ref": "#/components/schemas/integer"
+                                                    },
+                                                    "waterUsage": {
+                                                        "$ref": "#/components/schemas/integer"
+                                                    },
+                                                    "gas_id": {
+                                                        "$ref": "#/components/schemas/id"
+                                                    },
+                                                    "water_id": {
+                                                        "$ref": "#/components/schemas/id"
+                                                    },
+                                                    "extra_id": {
+                                                        "$ref": "#/components/schemas/id"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

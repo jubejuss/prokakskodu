@@ -1,5 +1,7 @@
 import express, { Application } from 'express';
-import cors from 'cors';
+import swaggerUi from 'swagger-ui-express';
+import openapi from './openapi.json'
+import cors from 'cors'
 import authController from './components/auth/controller';
 import usersController from './components/users/controller';
 import indicatorsController from './components/indicators/controller';
@@ -30,11 +32,12 @@ app.post('/login', authController.login);
 // greate user
 app.post('/users', usersController.createUser);
 
-app.use(isLoggedIn);
+// app.use(isLoggedIn);
 
 // app.get('/users', usersController.getAllUsers);
 // add isAdminMiddleware to controll is admin or not
-app.get('/users', isAdmin, usersController.getAllUsers);
+// app.get('/users', isAdmin, usersController.getAllUsers);
+app.get('/users', usersController.getAllUsers);
 app.get('/users/:id', usersController.getUserById);
 app.delete('/users/:id', usersController.removeUser);
 
