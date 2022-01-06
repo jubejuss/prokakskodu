@@ -1,0 +1,59 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Apartment building api",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000"
+        }
+    ],
+    "paths": {
+        "/users": {
+            "get": {
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "users": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number",
+                                                        "example": 1
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "example": "maie@paie.ee"
+                                                    },
+                                                    "dateCreated": {
+                                                        "type": "string"
+                                                    },
+                                                    "dateDeleted": {
+                                                        "type": "string"
+                                                    },
+                                                    "dateUpdated": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

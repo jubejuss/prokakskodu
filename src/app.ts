@@ -1,5 +1,7 @@
 import express, { Application } from 'express';
-import cors from 'cors';
+import swaggerUi from 'swagger-ui-express';
+import openapi from './openapi.json'
+import cors from 'cors'
 import authController from './components/auth/controller';
 import usersController from './components/users/controller';
 import indicatorsController from './components/indicators/controller';
